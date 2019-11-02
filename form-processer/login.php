@@ -13,10 +13,10 @@ if (isset($_POST['login']) && !empty($_POST['uname']) && !empty($_POST['psw'])) 
         $_SESSION['valid'] = true;
         $_SESSION['uname'] = $login;
         $_SESSION['psw'] = $psw;
-        header("Location: admin.php");
+        header("Location: ../admin.php");
         echo 'You have entered valid use name and password';
     }else {
-        header("Location: index.php");
+        header("Location: ../index.php");
         exit;
     }
 }

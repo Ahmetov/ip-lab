@@ -7,7 +7,7 @@
 
     <style>
         body {
-            background: #000 url(img/judo.jpg);
+            background: #000 url(static/img/judo.jpg);
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
@@ -57,7 +57,7 @@
         <a class="nav-link" href="#">Pricing</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" style="background-color: darkred" href="logout.php">Log out</a>
+        <a class="nav-link" style="background-color: darkred" href="./logout.php">Log out</a>
     </li>
 </ul>
 </div>
@@ -65,23 +65,29 @@
 
 <div class="group-add">
 <div class="add-form">
-<form>
+    <form action="./form-processer/news.php" method="post">
     <div class="form-group">
         <label for="title">Заголовок новости</label>
-        <input type="email" class="form-control" id="title" placeholder="Заголовок новости">
+        <input class="form-control" id="title" name="title" placeholder="Заголовок новости">
     </div>
     <div class="form-group">
         <label for="short">Кратко</label>
-        <textarea class="form-control noresize" id="short" rows="3"></textarea>
+        <textarea class="form-control noresize" id="short" name="short" placeholder="Краткое содержание"
+                  rows="3"></textarea>
     </div>
     <div class="form-group">
         <label for="content">Содержание</label>
-        <textarea class="form-control noresize" id="content" rows="6"></textarea>
+        <textarea class="form-control noresize" id="content" name="content" placeholder="Текст новости"
+                  rows="6"></textarea>
     </div>
-    <button type="button" class="btn btn-dark">Создать</button>
+        <button type="submit" class="btn btn-dark">Создать</button>
 </form>
 </div>
 </div>
+
+<?php
+print_r($_ENV);
+?>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

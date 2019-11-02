@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Judo news</title>
-    <link rel="script" href="login.php">
+    <link rel="script" href="form-processer/login.php">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
@@ -15,16 +15,16 @@
             <div class="card">
                 <div class="card-header">Login, bruh</div>
                 <div class="card-body">
-                    <form action="login.php" method="post">
+                    <form action="form-processer/login.php" method="post">
                         <div class="form-group row">
-                            <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                            <label for="uname" class="col-md-4 col-form-label text-md-right">Login</label>
                             <div class="col-md-6">
                                 <input type="text" id="uname" class="form-control" name="uname" required autofocus>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                            <label for="psw" class="col-md-4 col-form-label text-md-right">Password</label>
                             <div class="col-md-6">
                                 <input type="password" id="psw" class="form-control" name="psw" required>
                             </div>
@@ -35,8 +35,8 @@
                                 Login
                             </button>
                         </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
     </div>
