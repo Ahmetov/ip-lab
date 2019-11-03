@@ -5,7 +5,7 @@ processNews();
 
 function processNews()
 {
-    $pass = '../news-posts/';
+    $pass = './news-posts/';
     if (isset($_POST['short']) && isset($_POST['title']) && isset($_POST['content'])) {
         $title = $_POST['title'];
         $short = $_POST['short'];
@@ -21,10 +21,10 @@ function processNews()
         try {
             foreach ($files as $file) {
                 if (endsWith($file, '.json')) {
-                    $tmp = json_encode(json_decode(file_get_contents($pass . $file)), JSON_UNESCAPED_UNICODE);
+                    $tmp = json_decode(file_get_contents($pass . $file), true);
+                    //echo $tmp['title'];
                     print_r($tmp);
                 }
-
             }
         } catch (Exception $e) {
             error_log($e->getMessage());
