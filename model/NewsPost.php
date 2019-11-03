@@ -2,20 +2,17 @@
 
 class NewsPost
 {
-    public static $counter = 0;
-
-    public $id;
+    public $date;
     public $title;
     public $short;
     public $content;
 
-    function __construct($id, $title, $short, $content)
+    function __construct($date, $title, $short, $content)
     {
-        self::$counter++;
         $this->content = $content;
         $this->short = $short;
         $this->title = $title;
-        $this->id = $id;
+        $this->date = $date;
     }
 }
 
