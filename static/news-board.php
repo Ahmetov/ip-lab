@@ -33,6 +33,12 @@
         .news-post p {
             margin: 2% 2% 0 2%;
         }
+
+        .news-post img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -62,6 +68,7 @@
 
 <?php
 $pass = './news-posts/';
+$imgPass = './pics/';
 $files = scandir($pass);
 try {
     foreach ($files as $file) {
@@ -75,6 +82,13 @@ try {
             echo("<h3 class=\"text-white text-center\">");
             echo($tmp['short']);
             echo("</h3>");
+
+            $i = $imgPass . substr($file, 0, -5) . '.png';
+            if (file_exists($i)) {
+                echo("<img src=\"");
+                echo($i);
+                echo("\">");
+            }
 
             echo("<p class=\"text-white\">");
             echo($tmp['content']);
@@ -91,21 +105,6 @@ function endsWith($haystack, $needle)
     return substr_compare($haystack, $needle, -strlen($needle)) === 0;
 }
 
-?>
-
-<div class="news-post">
-    <h1 class="text-white text-center">ЕЕЕ</h1>
-    <h3 class="text-white text-center"></h3>
-    <p class="text-white">asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>asdsd<br>
-    </p>
-</div>
-
-<div class="news-post">
-
-</div>
-
-<?php
-print_r($_ENV);
 ?>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -65,7 +65,7 @@
 
 <div class="group-add">
 <div class="add-form">
-    <form action="./form-processer/news.php" method="post">
+    <form action="./form-processer/news.php" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">Заголовок новости</label>
         <input class="form-control" id="title" name="title" placeholder="Заголовок новости">
@@ -80,13 +80,16 @@
         <textarea class="form-control noresize" id="content" name="content" placeholder="Текст новости"
                   rows="6"></textarea>
     </div>
+        <div class="form-group">
+            <input type="file" name="picture">
+        </div>
         <button type="submit" class="btn btn-dark">Создать</button>
 </form>
 </div>
 </div>
 
 <?php
-print_r($_ENV);
+
 ?>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
