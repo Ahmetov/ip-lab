@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Judo news</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -46,50 +47,77 @@
     <a class="navbar-brand" href="#">Judo world news</a>
 </nav>
 
-<?php
-$pass = './news-posts/';
-$imgPass = './pics/';
-$files = scandir($pass);
-try {
-    foreach ($files as $file) {
-        if (endsWith($file, '.json')) {
-            $tmp = json_decode(file_get_contents($pass . $file), true);
-            echo("<div class=\"news-post\">");
-            echo("<h1 class=\"text-white text-center\">");
-            echo($tmp['title']);
-            echo("</h1>");
+<button class="btn btn-info" onclick="onSort()">
+    Сортировать по заголовку
+</button>
 
-            echo("<h3 class=\"text-white text-center\">");
-            echo($tmp['short']);
-            echo("</h3>");
+<div id="news-container">
 
-            $i = $imgPass . substr($file, 0, -5) . '.png';
-            if (file_exists($i)) {
-                echo("<img src=\"");
-                echo($i);
-                echo("\">");
+</div>
+
+<script type="text/javascript">
+    let newsData;
+    $("document").ready(function () {
+        $.ajax({
+            url: "static/load-news.php",
+            type: "GET",
+            success: function (data) {
+                newsData = jQuery.parseJSON(data);
+                updateNewsBoard(newsData);
             }
+        });
+    });
 
-            echo("<p class=\"text-white\">");
-            echo($tmp['content']);
-            echo("</p>");
-            echo("</div>");
+    function updateNewsBoard(newsData) {
+        let container = document.getElementById('news-container');
+        for (let item of newsData) {
+            let innerContainer = document.createElement('div');
+            innerContainer.className = 'news-post';
+            generateHeader(innerContainer, item);
+            generateShort(innerContainer, item);
+            generateImg(innerContainer, item);
+            container.appendChild(innerContainer);
         }
     }
-} catch (Exception $e) {
-    error_log($e->getMessage());
-}
 
-function endsWith($haystack, $needle)
-{
-    return substr_compare($haystack, $needle, -strlen($needle)) === 0;
-}
+    function generateHeader(container, item) {
+        let headerTag = document.createElement('h1');
+        headerTag.innerHTML = item["title"];
+        headerTag.className = "text-white text-center";
+        container.appendChild(headerTag);
+    }
 
-?>
+    function generateShort(container, item) {
+        let shortTag = document.createElement('h3');
+        shortTag.innerHTML = item["short"];
+        shortTag.className = "text-white text-center";
+        container.appendChild(shortTag);
+    }
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+    function generateImg(container, item) {
+        if (item["image"]) {
+            let imageTag = document.createElement('img');
+            imageTag.setAttribute("src", item["image"]);
+            container.appendChild(imageTag);
+        }
+    }
+
+    function removeAllChildNodes() {
+        let element = document.getElementById('news-container');
+        let child = element.lastElementChild;
+        while (child) {
+            element.removeChild(child);
+            child = element.lastElementChild;
+        }
+    }
+
+    function onSort() {
+        removeAllChildNodes();
+        newsData.sort((a, b) => a.num < b.num ? 1 : -1);
+        updateNewsBoard(newsData);
+    }
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
