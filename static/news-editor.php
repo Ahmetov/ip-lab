@@ -6,7 +6,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
     <style>
         body {
             background: #000 url(static/img/judo.jpg);
@@ -29,6 +28,7 @@
             background-color: rgba(33, 33, 33, 0.99);
             border-radius: 3px;
             overflow-y: auto;
+            overflow-wrap: break-word;
         }
 
         .news-post p {
@@ -40,11 +40,36 @@
             max-width: 100%;
             height: auto;
         }
+
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 18px;
+            background-color: #CCC;
+        }
     </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark judo-navbar">
-    <a class="navbar-brand" href="#">Judo world news</a>
+    <a class="navbar-brand" href="news-board.php">Judo world news</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="admin.php">Add news<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">News editor<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="background-color: darkred" href="./logout.php">Log out</a>
+            </li>
+        </ul>
+    </div>
 </nav>
 
 <button class="btn btn-info" onclick="onSort()">
@@ -68,6 +93,24 @@
         });
     });
 
+    function dynamicDelete(date) {
+        $.ajax({
+            url: "static/delete-news.php",
+            type: "POST",
+            data: {date: date},
+            success: function (data) {
+                removeAllChildNodes();
+                for (let news of newsData) {
+                    if (news["date"] === date) {
+                        newsData.splice(newsData.findIndex(i => i.date === date), 1);
+                        break;
+                    }
+                }
+                updateNewsBoard(newsData);
+            }
+        });
+    }
+
     function updateNewsBoard(newsData) {
         let container = document.getElementById('news-container');
         for (let item of newsData) {
@@ -77,7 +120,19 @@
             generateShort(innerContainer, item);
             generateImg(innerContainer, item);
             generateContent(innerContainer, item);
+            generateDate(innerContainer, item);
             container.appendChild(innerContainer);
+
+            let delButton = document.createElement('button');
+            delButton.className = 'btn btn-danger text-white';
+            delButton.innerHTML = 'Remove';
+            delButton.setAttribute('onclick', 'dynamicDelete(\'' + item["date"] + '\')');
+            container.appendChild(delButton);
+
+            let updateButton = document.createElement('a');
+            updateButton.className = 'btn btn-warning text-white';
+            updateButton.innerHTML = 'Update';
+            container.appendChild(updateButton);
         }
     }
 
@@ -110,7 +165,15 @@
         container.appendChild(shortTag);
     }
 
+    function generateDate(container, item) {
+        let shortTag = document.createElement('span');
+        shortTag.innerHTML = item["date"];
+        shortTag.className = "text-white";
+        container.appendChild(shortTag);
+    }
+
     function removeAllChildNodes() {
+        debugger
         let element = document.getElementById('news-container');
         let child = element.lastElementChild;
         while (child) {

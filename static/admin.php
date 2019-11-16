@@ -22,7 +22,7 @@
         .group-add {
             padding-top: 2%;
             margin:2% 10% 0 10%;
-            height: 515px;
+            height: 550px;
             width:80%;
             background-color: rgba(33, 33, 33, 0.86);
             border-radius: 3px;
@@ -32,7 +32,6 @@
             margin:0 25% 0 25%;
             width:50%;
             color: white;
-            /*background-color: black;*/
         }
         .noresize {
             resize: none;
@@ -41,26 +40,26 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark judo-navbar">
-<a class="navbar-brand" href="#">Judo world news</a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarNav">
-<ul class="navbar-nav">
-    <li class="nav-item active">
-    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" style="background-color: darkred" href="./logout.php">Log out</a>
-    </li>
-</ul>
-</div>
+    <a class="navbar-brand" href="news-board.php">Judo world news</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Add news<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="news-editor.php">News editor</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="background-color: darkred" href="./logout.php">Log out</a>
+            </li>
+        </ul>
+    </div>
 </nav>
 
 <div class="group-add">

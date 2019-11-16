@@ -11,6 +11,8 @@ try {
             $property = array();
             $tmp = json_decode(file_get_contents($pass . $file), true);
 
+            $property["date"] = substr($file, 0, -5);
+
             $property["title"] = $tmp['title'];    //HEADER
 
             $property["short"] = $tmp['short'];    //SHORT
