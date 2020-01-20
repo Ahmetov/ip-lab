@@ -82,6 +82,7 @@
 
 <script type="text/javascript">
     let newsData;
+    //FIRST TIME DATA RECEIVED
     $("document").ready(function () {
         $.ajax({
             url: "static/load-news.php",
@@ -93,6 +94,7 @@
         });
     });
 
+    //DELETE
     function dynamicDelete(date) {
         $.ajax({
             url: "static/delete-news.php",
@@ -132,6 +134,7 @@
             let updateButton = document.createElement('a');
             updateButton.className = 'btn btn-warning text-white';
             updateButton.innerHTML = 'Update';
+            updateButton.setAttribute('href', 'update-news.php?id=' + item["date"]);
             container.appendChild(updateButton);
         }
     }
@@ -173,7 +176,6 @@
     }
 
     function removeAllChildNodes() {
-        debugger
         let element = document.getElementById('news-container');
         let child = element.lastElementChild;
         while (child) {

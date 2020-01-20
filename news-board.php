@@ -1,3 +1,3 @@
 <?php
-include 'static/news-board.php';
+    include 'static/news-board.php';
 ?>

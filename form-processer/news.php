@@ -69,11 +69,11 @@ function processNews()
         $name = md5_file($filePath);
 
         // Сгенерируем расширение файла на основе типа картинки
-        $extension = image_type_to_extension($image[2]);
+        //$extension = image_type_to_extension($image[2]);
 
         // Сократим .jpeg до .jpg
-        $format = str_replace('jpeg', 'jpg', $extension);
-        if (!move_uploaded_file($filePath, '../pics/' . $now->format('Y-m-d H-i-s') . $format)) {
+        //$format = str_replace('jpeg', 'jpg', $extension);
+        if (!move_uploaded_file($filePath, '../pics/' . $now->format('Y-m-d H-i-s') . '.jpg')) {
             header("Location: ../admin.php");
         }
     }
